@@ -88,3 +88,29 @@
    ```
 
 这些是MATLAB的一些进阶特性。你可以根据自己的需求和兴趣进一步探索。有其他方面你想了解的吗？
+
+读取CSV文件时，提示：错误使用 dlmread
+读取行 1 上的字段 1 时，无法解析 "Numeric" 字段。
+
+这个错误可能是由于你的CSV文件的第一行包含了非数值数据，比如列名或者表头信息。`dlmread` 和 `csvread` 函数默认情况下都预期文件中只包含数值数据。
+
+为了解决这个问题，你可以使用更灵活的 `readtable`、`readmatrix` 或 `readcell` 函数来读取CSV文件。这些函数能够更好地处理包含混合数据类型的文件。
+
+例如，使用 `readtable` 你可以这样做：
+
+```matlab
+% 使用readtable读取数据
+data = readtable('myfile.csv');
+
+% 显示前几行数据
+head(data);
+```
+
+如果你想将表格中的某一列数据转换为数组，你可以这样做：
+
+```matlab
+% 提取名为'ColumnName'的列
+columnData = data.ColumnName;
+```
+
+这样你就可以避免由于非数值数据导致的错误。
